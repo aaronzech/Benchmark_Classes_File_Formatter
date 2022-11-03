@@ -9,6 +9,7 @@ root = tk.Tk()
 root.withdraw()
 print("Select class file")
 class_file = filedialog.askopenfilename()
+print("File:",class_file)
 teacher_file = 'Classes.xlsx'
 
 # Change the Kindergarten Grade code from KF or 25 to K.
@@ -69,11 +70,16 @@ def deleteExtraColumns(file):
     ws.delete_cols(7)
     wb.save(file)
 
+def convertToCSV(file):
+    fileData = pd.read_excel(file,sheet_name='Sheet1')
+    fileData.to_csv("classes_IMPORT.csv",index=False)
+
 #Main Program 
 if __name__ == "__main__":
     print("Starting...")
-    #fixKindergartenGradeLevel(class_file)
+    fixKindergartenGradeLevel(class_file)
     formatSheet(class_file)
     pastInTeachers(class_file,teacher_file)
     deleteExtraColumns('classes_appened.xlsx')
+    convertToCSV('classes_appened.xlsx')
     print("done")
