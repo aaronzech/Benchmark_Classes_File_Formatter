@@ -1,6 +1,13 @@
 # Benchmark_Classes_File_Formatter
 Formats Synergy Export file to Benchmark Classes CSV import
 
+<H1>Prerequisites</h1>
+Have the following Python libraries installed.
+<ul><li> <a href="https://openpyxl.readthedocs.io/en/stable/">openpyxl</li>
+<li><a href="https://docs.python.org/3/library/tkinter.html">tkinter</li>
+<li><a href="https://pandas.pydata.org/">pandas</li></ul>
+
+
 <H1>Directions</h1>
 
 1) Download the "Benchmark Pilot Classes CSV" query from Synergy and save to downloads folder
