@@ -18,3 +18,6 @@ Have the following Python libraries installed.
 5) Upload the ________ file to Benchmark's tech website.
 <br></br>
 ![](https://github.com/aaronzech/images/blob/main/Screenshot_223.png)
+
+<H2>Inspiration</H2>
+I wanted to streamline the process from exporting the Synergy query and formatting the file manually in excel, constantly forgetting to teak a colmun header or somthing like that. So I let python do all the work to format the file into a format the Benchmark will take, and I don't need to provide any input.
