@@ -7,7 +7,7 @@ from tkinter import filedialog
 
 root = tk.Tk()
 root.withdraw()
-print("Select class file")
+print("Select Synergy class file")
 class_file = filedialog.askopenfilename()
 print("File:",class_file)
 teacher_file = 'Classes.xlsx'
@@ -35,7 +35,6 @@ def formatSheet(file):
         char = get_column_letter(col)
         try:
             ws[char + str(row)].value = ws[get_column_letter(2) + str(row)].value + "-" +ws[get_column_letter(7) + str(row)].value
-            print(ws[char + str(row)].value)
         except:
             print("error")
     
@@ -60,7 +59,6 @@ def pastInTeachers(file,file2):
     file = pd.read_excel(file,sheet_name='QRY801')
     file2 = pd.read_excel('Classes.xlsx',sheet_name='Teachers')
     merge = pd.concat([file,file2],axis=0) 
-    print(merge)
     merge.to_excel('classes_appened.xlsx',index=False)
 
 # Delete Extra columns in Newly appended sheet.
