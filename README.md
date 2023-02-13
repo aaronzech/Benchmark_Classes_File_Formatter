@@ -1,6 +1,11 @@
 # Benchmark_Classes_File_Formatter
 Formats Synergy Export file to Benchmark Classes CSV import
 
+<H3>Updates</H3>
+Version 1.0.1
+* Added maxRow variable - Ran into an issue when changing class sizes
+* Updated Kindergarten format function to change new Synergy Kindergarten export format. 
+
 <H1>Prerequisites</h1>
 Have the following Python libraries installed.
 <ul><li> <a href="https://openpyxl.readthedocs.io/en/stable/">openpyxl</li>
