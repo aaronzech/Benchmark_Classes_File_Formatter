@@ -7,38 +7,46 @@ from tkinter import filedialog
 
 root = tk.Tk()
 root.withdraw()
+
 print("Select Synergy class file")
 class_file = filedialog.askopenfilename()
 print("File:",class_file)
-teacher_file = 'Classes.xlsx'
+teacher_file = 'Classes_Template.xlsx'
 
 # Change the Kindergarten Grade code from KF or 25 to K.
 def fixKindergartenGradeLevel(file):
     wb = load_workbook(file) #Load Workbook
     ws = wb.active #Worksheet
-    for row in range (1,900): #stops at row 900
+    for row in range (1,1500): #stops at row 1500
         for col in range (6,7): # column J
             char = get_column_letter(col)
+            # Format Grade Level Value to "K" format
             if ws[char + str(row)].value == "KF" or ws[char + str(row)].value == "25":
+                ws[char + str(row)].value = 'K'
+            if ws[char + str(row)].value =="Kindergarten" or ws[char + str(row)].value == "IEP Kindergarten" :
                 ws[char + str(row)].value = 'K'
     wb.save(file)
             
 
 # Format the columns of class sheet to Benchmark format.
 def formatSheet(file):
+    
+    maxRow = 1500 # Updates this number if the file size changes, it will only process this many number of rows
+
     wb = load_workbook(file) #Load Workbook
     ws = wb.active #Worksheet
-
+    print(ws)
     #Concat Class Name with Last Name
-    for row in range (1,900): #stops at row 10
+    for row in range (1,maxRow): # Loop through rows 1 - bottom
      for col in range (3,4): #columns 1 -4
         char = get_column_letter(col)
         try:
             ws[char + str(row)].value = ws[get_column_letter(2) + str(row)].value + "-" +ws[get_column_letter(7) + str(row)].value
+            print([char + str(row)].value)
         except:
             print("error")
     
-    for row in range (2,900): #stops at row 10
+    for row in range (2,maxRow): # Loop through rows 2 - bottom
      for col in range (5,6): #columns 1 -4
         char = get_column_letter(col)
         char2 = get_column_letter(6)
@@ -47,8 +55,9 @@ def formatSheet(file):
         if(ws[char2 + str(row)].value):
             ws[char + str(row)].value = "STUDENT"
         else:
-             print("ROW",row)
-             print(ws[char2 + str(row)].value)
+             pass
+             #print("ROW",row)
+             #print(ws[char2 + str(row)].value)
 
     #change Column c
     ws['C1'].value = "Class's SIS Id"
@@ -57,7 +66,7 @@ def formatSheet(file):
 # Attach the teachers to the end of the class file.
 def pastInTeachers(file,file2):
     file = pd.read_excel(file,sheet_name='QRY801')
-    file2 = pd.read_excel('Classes.xlsx',sheet_name='Teachers')
+    file2 = pd.read_excel('Classes_Template.xlsx',sheet_name='Teachers')
     merge = pd.concat([file,file2],axis=0) 
     merge.to_excel('classes_appened.xlsx',index=False)
 
