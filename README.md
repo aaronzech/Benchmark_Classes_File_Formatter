@@ -3,7 +3,7 @@ Formats Synergy Export file to Benchmark Classes CSV import
 
 <H3>Updates</H3>
 Version 1.0.1
-* Added maxRow variable - Ran into an issue when changing class sizes
+* Added maxRow variable - Ran into an issue when changing class sizes<br>
 * Updated Kindergarten format function to change new Synergy Kindergarten export format. 
 
 <H1>Prerequisites</h1>
