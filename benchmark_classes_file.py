@@ -5,13 +5,7 @@ from openpyxl.utils import get_column_letter
 import tkinter as tk
 from tkinter import filedialog
 
-root = tk.Tk()
-root.withdraw()
 
-print("Select Synergy class file")
-class_file = filedialog.askopenfilename()
-print("File:",class_file)
-teacher_file = 'Classes_Template.xlsx'
 
 # Change the Kindergarten Grade code from KF or 25 to K.
 def fixKindergartenGradeLevel(file):
@@ -64,6 +58,7 @@ def formatSheet(file):
     wb.save(file)
 
 # Attach the teachers to the end of the class file.
+# Looks at Classes_Template.xlsx file for the teacher reference
 def pastInTeachers(file,file2):
     file = pd.read_excel(file,sheet_name='QRY801')
     file2 = pd.read_excel('Classes_Template.xlsx',sheet_name='Teachers')
@@ -84,6 +79,15 @@ def convertToCSV(file):
 #Main Program 
 if __name__ == "__main__":
     print("Starting...")
+
+    root = tk.Tk()
+    root.withdraw()
+
+    print("Select Synergy class file")
+    class_file = filedialog.askopenfilename()
+    print("File:",class_file)
+    teacher_file = 'Classes_Template.xlsx'
+
     fixKindergartenGradeLevel(class_file)
     formatSheet(class_file)
     pastInTeachers(class_file,teacher_file)
