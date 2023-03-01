@@ -4,11 +4,30 @@ from openpyxl import Workbook,load_workbook
 from openpyxl.utils import get_column_letter
 import tkinter as tk
 from tkinter import filedialog
-
+import csv
 
 
 # Change the Kindergarten Grade code from KF or 25 to K.
 def fixKindergartenGradeLevel(file):
+    
+    # START OF CSV FILE Implementation
+    if "CSV" in class_file or "csv" in class_file: 
+        with open(class_file) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=',')
+            line_count = 0
+
+            #Reading CSV FILE
+            for row in csv_reader:
+                if line_count == 0:
+                    print(f'Column names are {", ".join(row)}')
+                    line_count += 1
+                else:
+                    print(f'\t{row[0]}{row[1]}{row[2]}{row[3]}{row[4]}{row[5]}{row[6]}.') # CSV file only has 7 columns
+                    line_count += 1
+            print(f'Processed {line_count} lines.')
+
+    
+    # XLS File Format
     wb = load_workbook(file) #Load Workbook
     ws = wb.active #Worksheet
     for row in range (1,1500): #stops at row 1500
@@ -30,6 +49,7 @@ def formatSheet(file):
     wb = load_workbook(file) #Load Workbook
     ws = wb.active #Worksheet
     print(ws)
+
     #Concat Class Name with Last Name
     for row in range (1,maxRow): # Loop through rows 1 - bottom
      for col in range (3,4): #columns 1 -4
@@ -38,7 +58,8 @@ def formatSheet(file):
             ws[char + str(row)].value = ws[get_column_letter(2) + str(row)].value + "-" +ws[get_column_letter(7) + str(row)].value
             print([char + str(row)].value)
         except:
-            print("error")
+            pass
+            # print("error")
     
     for row in range (2,maxRow): # Loop through rows 2 - bottom
      for col in range (5,6): #columns 1 -4
@@ -78,13 +99,15 @@ def convertToCSV(file):
 
 #Main Program 
 if __name__ == "__main__":
-    print("Starting...")
+    
+    print("Starting...\n")
 
     root = tk.Tk()
     root.withdraw()
 
     print("Select Synergy class file")
     class_file = filedialog.askopenfilename()
+
     print("File:",class_file)
     teacher_file = 'Classes_Template.xlsx'
 
